@@ -12,7 +12,7 @@ const Header: React.FC = () => (
     alignItems="center"
     justifyContent="center"
     boxShadow="0 1px 5px 0 rgba(0,0,0,0.1)"
-    background="#4299E1"
+    background="primary"
   >
     <Text as="span" color="#fff" fontWeight="600" fontSize="1.1rem">
       PhlexEtrack Barcode Scanner

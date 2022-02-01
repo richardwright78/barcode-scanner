@@ -7,18 +7,16 @@ import { ScanResult } from "./components/ScanResult";
 import { Header } from "./components/Header";
 
 const theme = extendTheme({
-  styles: {
-    global: {
-      body: {
-        paddingTop: "4.5rem",
-      },
+  semanticTokens: {
+    colors: {
+      primary: "blue.400",
     },
   },
 });
 
 const App: React.FC = () => (
   <Router>
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
