@@ -9,6 +9,7 @@ const NavBar: React.FC = () => {
 
   return (
     <Box
+      as="nav"
       display="flex"
       position="fixed"
       bottom="0"
@@ -21,13 +22,23 @@ const NavBar: React.FC = () => {
     >
       <VStack onClick={() => navigate("/")} marginRight="2rem">
         <FontAwesomeIcon icon={faHome} color="#4299E1" size="lg" />
-        <Text style={{ marginTop: "0px" }} fontSize="sm" color="#4299E1">
-          Home
+        <Text
+          style={{ marginTop: "0px" }}
+          fontSize="sm"
+          color="#4299E1"
+          as="span"
+        >
+          PhlexEtrack
         </Text>
       </VStack>
       <VStack onClick={() => navigate("/scan-document")}>
         <FontAwesomeIcon icon={faBarcode} color="#4299E1" size="lg" />
-        <Text style={{ marginTop: "0px" }} fontSize="sm" color="#4299E1">
+        <Text
+          style={{ marginTop: "0px" }}
+          fontSize="sm"
+          color="#4299E1"
+          as="span"
+        >
           Scan Document
         </Text>
       </VStack>
