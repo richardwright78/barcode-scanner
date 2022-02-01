@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Barcode Scanner
 
 This is a basic proof of concept for a barcode scanning app using react-qr-barcode-scanner https://github.com/jamenamcinteer/react-qr-barcode-scanner.
 
