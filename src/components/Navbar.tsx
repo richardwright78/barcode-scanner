@@ -17,7 +17,7 @@ const NavBar: React.FC = () => (
     background="white"
     zIndex="200"
   >
-    <NavItem text="PhlexEtrack" path="/" icon={faHome} margin="2rem" />
+    <NavItem text="[App name]" path="/" icon={faHome} margin="2rem" />
     <NavItem text="Scan Document" path="/scan-document" icon={faBarcode} />
   </Box>
 );

@@ -15,7 +15,7 @@ const Header: React.FC = () => (
     background="primary"
   >
     <Text as="span" color="#fff" fontWeight="600" fontSize="1.1rem">
-      PhlexEtrack Barcode Scanner
+      [App name] Barcode Scanner
     </Text>
   </Box>
 );
