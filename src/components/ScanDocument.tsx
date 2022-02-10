@@ -36,7 +36,7 @@ const ScanDocument: React.FC = () => {
         />
       </Center>
       <Center height="100vh" paddingBottom="3rem" background="#000" zIndex="0">
-        <ScanningApp onUpdate={handleScan} torch />
+        <ScanningApp onUpdate={handleScan} torch={true} />
       </Center>
     </>
   );
