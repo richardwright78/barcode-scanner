@@ -1,14 +1,15 @@
 import { useLocation } from "react-router-dom";
-import { Center, Text, VStack } from "@chakra-ui/react";
+import { Text, VStack } from "@chakra-ui/react";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { CenterDiv } from "./styled-components";
 
 const ScanResult: React.FC = () => {
   const { search } = useLocation();
   const searchParams = new URLSearchParams(search);
 
   return (
-    <Center height="100vh">
+    <CenterDiv background="transparent" zIndex="0">
       <VStack spacing="2rem">
         <FontAwesomeIcon icon={faCheckCircle} color="#68D391" size="6x" />
         <Text fontSize="1.5rem" fontWeight="700">
@@ -23,7 +24,7 @@ const ScanResult: React.FC = () => {
           </Text>
         </VStack>
       </VStack>
-    </Center>
+    </CenterDiv>
   );
 };
 
