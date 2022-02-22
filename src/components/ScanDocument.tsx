@@ -28,7 +28,7 @@ const ScanDocument: React.FC = () => {
 
   return (
     <>
-      <CentreDiv background="transparent" zIndex="1000">
+      <CentreDiv background="transparent" zIndex="100">
         <Box
           border={`4px dashed ${documentScanned ? "#48BB78" : "white"}`}
           borderRadius="1rem"
