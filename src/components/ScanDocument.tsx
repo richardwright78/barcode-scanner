@@ -27,12 +27,12 @@ const ScanDocument: React.FC = () => {
       <ScanditBarcodeScanner
         licenseKey={licenseKey}
         engineLocation="js"
-        onReady={() => console.log("READY")}
         onScan={handleScan}
         onScanError={(error: any) => setError(error)}
         scanSettings={scanSettings}
         enableTorchToggle={false}
         enableCameraSwitcher={false}
+        laserArea={{ x: 0, y: 0.25, width: 1, height: 0.5 }}
       />
     </CenterDiv>
   );
