@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Box } from "@chakra-ui/react";
 // @ts-ignore
 import ScanditBarcodeScanner from "scandit-sdk-react";
-import { Barcode, ScanSettings } from "scandit-sdk";
+import { Barcode, BarcodePicker, ScanSettings } from "scandit-sdk";
 
 const ScanDocument: React.FC = () => {
   const [, setError] = useState();
@@ -36,7 +36,7 @@ const ScanDocument: React.FC = () => {
           height="25vh"
         />
       </CentreDiv>
-      <CentreDiv background="#000" zIndex="0">
+      <CentreDiv background="#000" zIndex="0" id="scandit-scanner">
         <ScanditBarcodeScanner
           licenseKey={licenseKey}
           engineLocation="js"
@@ -44,6 +44,7 @@ const ScanDocument: React.FC = () => {
           onScan={handleScan}
           onScanError={(error: any) => setError(error)}
           scanSettings={scanSettings}
+          videoFit={BarcodePicker.ObjectFit.COVER}
         />
       </CentreDiv>
     </>
