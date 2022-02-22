@@ -3,7 +3,7 @@ import { CenterDiv } from "./styled-components";
 
 const Home: React.FC = () => {
   return (
-    <CenterDiv background="transparent" zIndex="0">
+    <CenterDiv>
       <VStack spacing="1.5rem">
         <Text
           textAlign="center"
