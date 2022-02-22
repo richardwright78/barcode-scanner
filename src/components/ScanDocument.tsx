@@ -18,7 +18,11 @@ const ScanDocument: React.FC = () => {
   });
 
   const handleScan = (scanResult: any) => {
-    navigate(`/scan-result?result=${scanResult.barcodes[0].data}`);
+    setDocumentScanned(true);
+
+    setTimeout(() => {
+      navigate(`/scan-result?result=${scanResult.barcodes[0].data}`);
+    }, 1000);
   };
 
   return (
@@ -44,7 +48,7 @@ const ScanDocument: React.FC = () => {
           engineLocation="js"
           onReady={() => console.log("READY")}
           onScan={handleScan}
-          onScanError={(error: any) => console.log("ERROR>>> ", error)}
+          onScanError={(error: any) => setError(error)}
           scanSettings={scanSettings}
         />
       </Center>
