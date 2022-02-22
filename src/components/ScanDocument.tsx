@@ -1,7 +1,7 @@
 import { useState } from "react";
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@chakra-ui/react";
+import { CenterDiv } from "./styled-components";
 // @ts-ignore
 import ScanditBarcodeScanner from "scandit-sdk-react";
 import { Barcode, BarcodePicker, ScanSettings } from "scandit-sdk";
@@ -28,15 +28,15 @@ const ScanDocument: React.FC = () => {
 
   return (
     <>
-      <CentreDiv background="transparent" zIndex="100">
+      <CenterDiv background="transparent" zIndex="100">
         <Box
           border={`4px dashed ${documentScanned ? "#48BB78" : "white"}`}
           borderRadius="1rem"
           width="75vw"
           height="25vh"
         />
-      </CentreDiv>
-      <CentreDiv background="#000" zIndex="0" id="scandit-scanner">
+      </CenterDiv>
+      <CenterDiv background="#000" zIndex="0" id="scandit-scanner">
         <ScanditBarcodeScanner
           licenseKey={licenseKey}
           engineLocation="js"
@@ -46,22 +46,9 @@ const ScanDocument: React.FC = () => {
           scanSettings={scanSettings}
           videoFit={BarcodePicker.ObjectFit.COVER}
         />
-      </CentreDiv>
+      </CenterDiv>
     </>
   );
 };
-
-const CentreDiv = styled.div<{ background: string; zIndex: string }>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: -webkit-fill-available;
-  width: 100%;
-  margin-bottom: 3rem;
-  margin-top: 3.5rem;
-  background: ${({ background }) => background};
-  z-index: ${({ zIndex }) => zIndex};
-  position: fixed;
-`;
 
 export { ScanDocument };

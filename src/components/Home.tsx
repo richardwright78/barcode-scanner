@@ -1,9 +1,9 @@
-import { Center, VStack, Text, Button, chakra } from "@chakra-ui/react";
-import logo from "../img/logo.png";
+import { VStack, Text, Button } from "@chakra-ui/react";
+import { CenterDiv } from "./styled-components";
 
 const Home: React.FC = () => {
   return (
-    <Center height="100vh">
+    <CenterDiv background="transparent" zIndex="0">
       <VStack spacing="1.5rem">
         <Text
           textAlign="center"
@@ -36,7 +36,7 @@ const Home: React.FC = () => {
           Click on the Scan Document tab below to scan a document barcode.
         </Text>
       </VStack>
-    </Center>
+    </CenterDiv>
   );
 };
 
