@@ -56,7 +56,8 @@ const CentreDiv = styled.div<{ background: string; zIndex: string }>`
   justify-content: center;
   height: -webkit-fill-available;
   width: 100%;
-  padding-bottom: 3rem;
+  margin-bottom: 3rem;
+  margin-top: 3.5rem;
   background: ${({ background }) => background};
   z-index: ${({ zIndex }) => zIndex};
   position: fixed;
