@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { CenterDiv } from "./styled-components";
 // @ts-ignore
 import ScanditBarcodeScanner from "scandit-sdk-react";
-import { Barcode, ScanSettings } from "scandit-sdk";
+import { Barcode, ScanSettings, BarcodePicker } from "scandit-sdk";
 
 const ScanDocument: React.FC = () => {
   const [, setError] = useState();
@@ -33,6 +33,7 @@ const ScanDocument: React.FC = () => {
         enableTorchToggle={false}
         enableCameraSwitcher={false}
         laserArea={{ x: 0, y: 0.25, width: 1, height: 0.5 }}
+        videoFit={BarcodePicker.ObjectFit.CONTAIN}
       />
     </CenterDiv>
   );
