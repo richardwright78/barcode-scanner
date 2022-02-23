@@ -23,7 +23,7 @@ const ScanDocument: React.FC = () => {
         scanner.onFrameRead = (results: any) => {
           for (let result of results) {
             if (result.barcodeText.indexOf("Attention(exceptionCode") === -1) {
-              console.log("RESULT>>>>> ", result);
+              console.log("RESULT>>>>> ", result.barcodeText);
             }
           }
         };
