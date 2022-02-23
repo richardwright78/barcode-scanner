@@ -1,12 +1,47 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Center, Box } from "@chakra-ui/react";
-import ScanningApp from "react-qr-barcode-scanner";
+import ScanningApp from "dynamsoft-javascript-barcode";
+
+ScanningApp.BarcodeReader.engineResourcePath =
+  "https://cdn.jsdelivr.net/npm/dynamsoft-javascript-barcode@8.8.7/dist/";
 
 const ScanDocument: React.FC = () => {
   const [, setError] = useState();
   const [documentScanned, setDocumentScanned] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  const scanningAppRef = useRef();
+
+  useEffect(() => {
+    let scanner: any;
+    (async () => {
+      try {
+        scanner = await ScanningApp.BarcodeScanner.createInstance();
+        const scannerWrapper: any = scanningAppRef.current;
+
+        scanner.onFrameRead = (results: any) => {
+          for (let result of results) {
+            if (result.barcodeText.indexOf("Attention(exceptionCode") === -1) {
+              console.log("RESULT>>>>> ", result);
+            }
+          }
+        };
+
+        if (scannerWrapper) scannerWrapper.appendChild(scanner.getUIElement());
+
+        await scanner.open();
+      } catch (ex) {
+        console.error(ex);
+      }
+    })();
+
+    return () => {
+      (async () => {
+        if (scanner) await scanner.destroy();
+      })();
+    };
+  }, []);
 
   const handleScan = (error: any, result: any) => {
     if (error) setError(error);
@@ -20,28 +55,9 @@ const ScanDocument: React.FC = () => {
 
   return (
     <>
-      <Center
-        height="100vh"
-        width="100%"
-        paddingBottom="3rem"
-        background="transparent"
-        zIndex="100"
-        position="fixed"
-      >
-        <Box
-          border={`4px dashed ${documentScanned ? "#48BB78" : "white"}`}
-          borderRadius="1rem"
-          width="75vw"
-          height="25vh"
-        />
-      </Center>
       <Center height="100vh" paddingBottom="3rem" background="#000" zIndex="0">
-        <ScanningApp
-          onUpdate={handleScan}
-          torch={true}
-          height="35%"
-          width="100%"
-        />
+        {/* @ts-ignore */}
+        <Box height="50vh" width="100%" ref={scanningAppRef} />
       </Center>
     </>
   );
