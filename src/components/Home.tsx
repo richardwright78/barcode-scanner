@@ -22,7 +22,7 @@ const Home: React.FC = () => {
           fontWeight="600"
           padding="0 2rem"
         >
-          Some fascinating introductory text about the [App name] app.
+          Some introductory text about the [App name] app.
         </Text>
         <Button background="primary" color="white">
           Help Me
