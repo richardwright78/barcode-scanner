@@ -56,7 +56,7 @@ const ScanDocument: React.FC = () => {
     <CenterDiv background="#000" zIndex="0" id="scandit-scanner">
       <ScanditBarcodeScanner
         licenseKey={licenseKey}
-        engineLocation="js"
+        engineLocation="https://cdn.jsdelivr.net/npm/scandit-sdk@5.x/build"
         onScan={handleScan}
         onScanError={(error: any) => setError(error)}
         scanSettings={scanSettings}
