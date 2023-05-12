@@ -1,5 +1,4 @@
-import { Center, VStack, Text, Button, chakra } from "@chakra-ui/react";
-import logo from "../img/logo.png";
+import { Center, VStack, Text, Button } from "@chakra-ui/react";
 
 const Home: React.FC = () => {
   return (
