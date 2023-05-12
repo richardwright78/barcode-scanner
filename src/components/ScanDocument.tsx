@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Center, Box } from "@chakra-ui/react";
-import ScanningApp from "dynamsoft-javascript-barcode";
+import { BarcodeScanner } from "dynamsoft-javascript-barcode";
 
-ScanningApp.BarcodeReader.engineResourcePath =
-  "https://cdn.jsdelivr.net/npm/dynamsoft-javascript-barcode@8.8.7/dist/";
+BarcodeScanner.engineResourcePath =
+  "https://cdn.jsdelivr.net/npm/dynamsoft-javascript-barcode@9.6.20/dist/";
 
+BarcodeScanner.license = process.env.REACT_APP_SCANDIT_KEY as string;
+      
 type ScanResults = {
   barcodeText: string;
 }[];
@@ -21,7 +23,7 @@ const ScanDocument: React.FC = () => {
     let scanner: any;
     (async () => {
       try {
-        scanner = await ScanningApp.BarcodeScanner.createInstance();
+        scanner = await BarcodeScanner.createInstance();
         const scannerWrapper: any = scanningAppRef.current;
 
         scanner.onFrameRead = (results: ScanResults) => handleScan(results);
