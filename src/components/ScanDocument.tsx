@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Center, Box } from "@chakra-ui/react";
 import { BarcodeScanner } from "dynamsoft-javascript-barcode";
@@ -13,14 +13,20 @@ type ScanResults = {
 }[];
 
 const ScanDocument: React.FC = () => {
-  const [, setError] = useState();
-  const [documentScanned, setDocumentScanned] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const scanningAppRef = useRef();
 
   useEffect(() => {
     let scanner: any;
+    const handleScan = (results: ScanResults) => {
+      for (let result of results) {
+        const { barcodeText } = result;
+        if (barcodeText?.indexOf("Attention(exceptionCode") === -1) {
+          navigate(`/scan-result?result=${barcodeText}`);
+        }
+      }
+    };
     (async () => {
       try {
         scanner = await BarcodeScanner.createInstance();
@@ -41,16 +47,7 @@ const ScanDocument: React.FC = () => {
         if (scanner) await scanner.destroy();
       })();
     };
-  }, []);
-
-  const handleScan = (results: ScanResults) => {
-    for (let result of results) {
-      const { barcodeText } = result;
-      if (barcodeText?.indexOf("Attention(exceptionCode") === -1) {
-        navigate(`/scan-result?result=${barcodeText}`);
-      }
-    }
-  };
+  }, [navigate]);
 
   return (
     <>
