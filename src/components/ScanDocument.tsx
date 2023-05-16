@@ -1,13 +1,17 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { CenterDiv } from "./styled-components";
 // @ts-ignore
 import ScanditBarcodeScanner from "scandit-sdk-react";
 import { Barcode, ScanSettings, BarcodePicker } from "scandit-sdk";
+import { useToast } from "@chakra-ui/react";
 
-const ScanDocument: React.FC = () => {
+interface ScanDocumentProps {
+  setScans: any;
+}
+
+const ScanDocument: React.FC<ScanDocumentProps> = ({ setScans }: ScanDocumentProps) => {
   const [, setError] = useState();
-  const navigate = useNavigate();
+  const toast = useToast();
 
   const licenseKey = process.env.REACT_APP_SCANDIT_KEY;
 
@@ -47,9 +51,16 @@ const ScanDocument: React.FC = () => {
   });
 
   const handleScan = (scanResult: any) => {
-    setTimeout(() => {
-      navigate(`/scan-result?result=${scanResult.barcodes[0].data}`);
-    }, 1000);
+    const barcode = scanResult.barcodes[0].data;
+    setScans((prevScans: string[]) => [ ...prevScans, barcode ]);
+    toast({
+      title: 'Document Scanned',
+      description: barcode,
+      status: 'success',
+      duration: 1500,
+      isClosable: false,
+      position: "top"
+    })
   };
 
   return (
