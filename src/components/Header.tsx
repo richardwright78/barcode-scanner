@@ -29,6 +29,7 @@ const Header: React.FC<HeaderProps> = ({ scanCount, setDrawerOpen }: HeaderProps
         </Text>
         <Box 
           position="fixed" 
+          marginLeft="1rem"
           top="0" 
           right="1rem" 
           display="flex" 

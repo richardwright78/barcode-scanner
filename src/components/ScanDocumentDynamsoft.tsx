@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
-import { Center, Box, useToast } from "@chakra-ui/react";
+import { useEffect, useRef, useState } from "react";
+import { Center, Box, useToast, Text } from "@chakra-ui/react";
 import { BarcodeScanner } from "dynamsoft-javascript-barcode";
 
 BarcodeScanner.engineResourcePath =
@@ -17,7 +17,10 @@ interface ScanDocumentDynamsoftProps {
 
 const ScanDocumentDynamsoft: React.FC<ScanDocumentDynamsoftProps> = ({ setScans }:ScanDocumentDynamsoftProps) => {
   const scanningAppRef = useRef();
+  const scanningTextRef = useRef({ current: { innerHTML: '' } });
   const toast = useToast();
+  const [ scanningEnabled, setScanningEnabled ] = useState(false);
+  const [ scanerInstance, setScanerInstance ] = useState(null);
 
   useEffect(() => {
     let scanner: any;
@@ -37,16 +40,25 @@ const ScanDocumentDynamsoft: React.FC<ScanDocumentDynamsoftProps> = ({ setScans 
     };
     (async () => {
       try {
-        scanner = await BarcodeScanner.createInstance();
-        const scannerWrapper: any = scanningAppRef.current;
-
-        scanner.onUniqueRead = (text:any, result:any) => {
-          handleScan(result)
-        };
-
-        if (scannerWrapper) scannerWrapper.appendChild(scanner.getUIElement());
-
-        await scanner.open();
+        if (!scanerInstance) {
+          scanner = await BarcodeScanner.createInstance();
+          setScanerInstance(scanner)
+          const scannerWrapper: any = scanningAppRef.current;
+  
+          scanner.onUniqueRead = (text:any, result:any) => {
+            {/* @ts-ignore */}
+            if (scanningTextRef.current.innerHTML.includes("Scanning")) {
+              handleScan(result);
+              setScanningEnabled(false);
+            }
+          };
+  
+          if (scannerWrapper) scannerWrapper.appendChild(scanner.getUIElement());
+  
+          if(!scanner.destroy) {
+            await scanner.open();
+          }
+        }
       } catch (ex) {
         console.error(ex);
       }
@@ -54,14 +66,18 @@ const ScanDocumentDynamsoft: React.FC<ScanDocumentDynamsoftProps> = ({ setScans 
 
     return () => {
       (async () => {
-        if (scanner) await scanner.destroy();
+        if (scanner?.destroy) await scanner.destroy();
       })();
     };
-  }, [setScans, toast]);
+  }, [setScans, toast, scanningEnabled, scanerInstance]);
 
   return (
     <>
-      <Center height="100vh" paddingBottom="3rem" background="#000" zIndex="0">
+      <Center height="100vh" paddingBottom="3rem" background="#000" zIndex="0" onClick={() => setScanningEnabled(true)}>
+        {/* @ts-ignore */}
+      <Text as="div" color={scanningEnabled ? '#68D391' : '#fff'} position="fixed" top="5rem" textAlign="center" ref={scanningTextRef}>
+        {scanningEnabled ? 'Scanning' : 'Tap anywhere to enable scanning'}
+      </Text>
         {/* @ts-ignore */}
         <Box height="50vh" width="100vw" ref={scanningAppRef} />
       </Center>

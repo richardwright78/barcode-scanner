@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { CenterDiv } from "./styled-components";
 // @ts-ignore
 import ScanditBarcodeScanner from "scandit-sdk-react";
-import { Barcode, ScanSettings, BarcodePicker } from "scandit-sdk";
-import { useToast } from "@chakra-ui/react";
+import { Barcode, ScanSettings, BarcodePicker, ScanResult } from "scandit-sdk";
+import { useToast, Text } from "@chakra-ui/react";
 
 interface ScanDocumentProps {
   setScans: any;
@@ -11,7 +11,9 @@ interface ScanDocumentProps {
 
 const ScanDocument: React.FC<ScanDocumentProps> = ({ setScans }: ScanDocumentProps) => {
   const [, setError] = useState();
+  const [scanningEnabled, setScanningEnabled] = useState<boolean>(false);
   const toast = useToast();
+  const scanningTextRef = useRef({ current: { innerHTML: '' } });
 
   const licenseKey = process.env.REACT_APP_SCANDIT_KEY;
 
@@ -50,21 +52,29 @@ const ScanDocument: React.FC<ScanDocumentProps> = ({ setScans }: ScanDocumentPro
     codeDuplicateFilter: 1000, // Minimum delay between duplicate results
   });
 
-  const handleScan = (scanResult: any) => {
-    const barcode = scanResult.barcodes[0].data;
-    setScans((prevScans: string[]) => [ ...prevScans, barcode ]);
-    toast({
-      title: 'Document Scanned',
-      description: barcode,
-      status: 'success',
-      duration: 1500,
-      isClosable: false,
-      position: "top"
-    })
+  const handleScan = (scanResult:ScanResult) => {
+    {/* @ts-ignore */}
+    if (scanningTextRef.current.innerHTML.includes("Scanning")) {
+      const barcode = scanResult.barcodes[0].data;
+      setScans((prevScans: string[]) => [ ...prevScans, barcode ]);
+      toast({
+        title: 'Document Scanned',
+        description: barcode,
+        status: 'success',
+        duration: 1500,
+        isClosable: false,
+        position: "top"
+      })
+      setScanningEnabled(false);
+    }
   };
 
   return (
-    <CenterDiv background="#000" zIndex="0" id="scandit-scanner">
+    <CenterDiv background="#000" zIndex="0" id="scandit-scanner" onClick={() => setScanningEnabled(true)}>
+      {/* @ts-ignore */}
+      <Text as="div" color={scanningEnabled ? '#68D391' : '#fff'} position="fixed" top="5rem" textAlign="center" ref={scanningTextRef}>
+        {scanningEnabled ? 'Scanning' : 'Tap anywhere to enable scanning'}
+      </Text>
       <ScanditBarcodeScanner
         licenseKey={licenseKey}
         engineLocation="https://cdn.jsdelivr.net/npm/scandit-sdk@5.x/build"
