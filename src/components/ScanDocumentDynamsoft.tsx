@@ -46,7 +46,7 @@ const ScanDocumentDynamsoft: React.FC<ScanDocumentDynamsoftProps> = ({ setScans 
           const scannerWrapper: any = scanningAppRef.current;
   
           scanner.onUniqueRead = (text:any, result:any) => {
-            {/* @ts-ignore */}
+            /* @ts-ignore */
             if (scanningTextRef.current.innerHTML.includes("Scanning")) {
               handleScan(result);
               setScanningEnabled(false);

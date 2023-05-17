@@ -53,7 +53,7 @@ const ScanDocument: React.FC<ScanDocumentProps> = ({ setScans }: ScanDocumentPro
   });
 
   const handleScan = (scanResult:ScanResult) => {
-    {/* @ts-ignore */}
+    /* @ts-ignore */
     if (scanningTextRef.current.innerHTML.includes("Scanning")) {
       const barcode = scanResult.barcodes[0].data;
       setScans((prevScans: string[]) => [ ...prevScans, barcode ]);
