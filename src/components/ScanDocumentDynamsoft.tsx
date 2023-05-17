@@ -7,9 +7,9 @@ BarcodeScanner.engineResourcePath =
 
 BarcodeScanner.license = process.env.REACT_APP_DYNAMSOFT_KEY as string;
       
-type ScanResults = {
+type ScanResult = {
   barcodeText: string
-}[];
+};
 
 interface ScanDocumentDynamsoftProps {
   setScans: any
@@ -21,7 +21,7 @@ const ScanDocumentDynamsoft: React.FC<ScanDocumentDynamsoftProps> = ({ setScans 
 
   useEffect(() => {
     let scanner: any;
-    const handleScan = (result: any) => {
+    const handleScan = (result: ScanResult) => {
         const { barcodeText } = result;
         if (barcodeText?.indexOf("Attention(exceptionCode") === -1) {
           setScans((prevScans: string[]) => [ ...prevScans, barcodeText ]);
