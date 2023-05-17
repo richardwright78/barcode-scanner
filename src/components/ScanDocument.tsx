@@ -73,7 +73,7 @@ const ScanDocument: React.FC<ScanDocumentProps> = ({ setScans }: ScanDocumentPro
     <CenterDiv background="#000" zIndex="0" id="scandit-scanner" onClick={() => setScanningEnabled(true)}>
       {/* @ts-ignore */}
       <Text as="div" color={scanningEnabled ? '#68D391' : '#fff'} position="fixed" top="5rem" textAlign="center" ref={scanningTextRef}>
-        {scanningEnabled ? 'Scanning' : 'Tap anywhere to enable scanning'}
+        {scanningEnabled ? 'Scanning' : 'Tap here to enable scanning'}
       </Text>
       <ScanditBarcodeScanner
         licenseKey={licenseKey}

@@ -76,7 +76,7 @@ const ScanDocumentDynamsoft: React.FC<ScanDocumentDynamsoftProps> = ({ setScans 
       <Center height="100vh" paddingBottom="3rem" background="#000" zIndex="0" onClick={() => setScanningEnabled(true)}>
         {/* @ts-ignore */}
       <Text as="div" color={scanningEnabled ? '#68D391' : '#fff'} position="fixed" top="5rem" textAlign="center" ref={scanningTextRef}>
-        {scanningEnabled ? 'Scanning' : 'Tap anywhere to enable scanning'}
+        {scanningEnabled ? 'Scanning' : 'Tap here to enable scanning'}
       </Text>
         {/* @ts-ignore */}
         <Box height="50vh" width="100vw" ref={scanningAppRef} />
