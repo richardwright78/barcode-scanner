@@ -4,6 +4,7 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { NavBar } from "./components/Navbar";
 import { Home } from "./components/Home";
 import { ScanDocument } from "./components/ScanDocument";
+import { ScanDocumentDynamsoft } from "./components/ScanDocumentDynamsoft";
 import { ScanResult } from "./components/ScanResult";
 import { Header } from "./components/Header";
 import { ScanDrawer } from "./components/ScanDrawer";
@@ -27,6 +28,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/scan-document" element={<ScanDocument setScans={setScans} />} />
+          <Route path="/scan-document-dynamsoft" element={<ScanDocumentDynamsoft setScans={setScans} />} />
           <Route path="/scan-result" element={<ScanResult />} />
         </Routes>
         <ScanDrawer isOpen={drawerOpen} setDrawerOpen={setDrawerOpen} scans={scans} setScans={setScans} />

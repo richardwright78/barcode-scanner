@@ -21,9 +21,11 @@ const NavBar: React.FC<NavBarProps> = ({ setScans }: NavBarProps) => {
       boxShadow="0 -1px 5px 0 rgba(0,0,0,0.1)"
       background="white"
       zIndex="200"
+      gap="1rem"
     >
-      <NavItem text="[App name]" path="/" icon={faHome} margin="2rem" setScans={setScans} />
-      <NavItem text="Scan Document" path="/scan-document" icon={faBarcode} />
+      <NavItem text="[App name]" path="/" icon={faHome} setScans={setScans} />
+      <NavItem text="Scandit" path="/scan-document" icon={faBarcode} />
+      <NavItem text="Dynamsoft" path="/scan-document-dynamsoft" icon={faBarcode} setScans={setScans}/>
     </Box>
   )
 };

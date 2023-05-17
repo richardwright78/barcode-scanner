@@ -27,6 +27,7 @@ const NavItem: React.FC<NavItemProps> = ({ path, icon, text, margin, setScans })
         fontSize="sm"
         color="#4299E1"
         as="span"
+        userSelect="none"
       >
         {text}
       </Text>
